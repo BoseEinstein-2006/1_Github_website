@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            min-height: 45px; /* Prevent layout shift during animation */
+        }
+        .typing {
+            border-right: 2px solid #000;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: typing 2s steps(20, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #000 }
+        }
+        .project {
+            background: white;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .project:hover {
+            transform: translateY(-3px);
+            background-color: #fff7a3;
+        }
+        .project h2 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .emoji {
+            font-size: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+        }
+    </style>
+    <script>
+        const randomEmojis = ['😊', '😃', '😄', '😁', '😆', '🌟', '☀️', '🚀', '✨', '💫', '🌠', '😉', '😎', '🌻', '🌺', '🍀', '🎉', '🌞'];
+        
+        function typeWriter(text, element, callback) {
+            let i = 0;
+            element.innerHTML = '';
+            element.classList.add('typing');
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 100);
+                } else {
+                    element.classList.remove('typing');
+                    if (callback) callback();
+                }
+            }
+            type();
+        }
+
+        function showRandomEmoji() {
+            const randomEmoji = randomEmojis[Math.floor(Math.random() * randomEmojis.length)];
+            document.querySelector('#greeting-emoji').textContent = randomEmoji;
+            
+            setTimeout(() => {
+                document.querySelector('#greeting-emoji').textContent = '👋';
+            }, 1000);
+        }
+
+        window.onload = function() {
+            const h1 = document.querySelector('h1');
+            h1.innerHTML = 'Hi there! <span id="greeting-emoji"></span>';
+            
+            typeWriter('Hi there!', h1, () => {
+                showRandomEmoji();
+            });
+        };
+    </script>
+</head>
+<body>
+    <h1></h1>
+    <p>Welcome to my projects page! Here are some of my works related to semiconductors and physics:</p>
+
+    <div class="project">
+        <h2><span class="emoji">🔌</span> Quantum Dot Simulator</h2>
+        <p>A Python simulation tool for modeling electron behavior in semiconductor quantum dots under varying electric fields.</p>
+        <a href="https://github.com/yourusername/quantum-dot-simulator" target="_blank">View on GitHub →</a>
+    </div>
+
+    <div class="project">
+        <h2><span class="emoji">❄️</span> Cryogenic MOSFET Analyzer</h2>
+        <p>An analysis toolkit for characterizing MOSFET performance at cryogenic temperatures (4K-77K) for quantum computing applications.</p>
+        <a href="https://github.com/yourusername/cryo-mosfet-analyzer" target="_blank">View on GitHub →</a>
+    </div>
+
+    <div class="project">
+        <h2><span class="emoji">⚡</span> Semiconductor Defect Visualizer</h2>
+        <p>Interactive 3D visualization of common crystal defects in semiconductors using WebGL and crystallography data.</p>
+        <a href="https://github.com/yourusername/defect-visualizer" target="_blank">View on GitHub →</a>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ and ☕</p>
+    </footer>
+</body>
+</html>
